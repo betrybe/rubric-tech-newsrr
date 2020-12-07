@@ -1,0 +1,20 @@
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  evaluator_job:
+    name: Evaluator Job
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pytest Evaluator Step
+        uses: betrybe/pytest-evaluator-action@add-deps
+        with:
+          repository_main_branch: master
+        id: pytest_evaluator
+      - name: Store evaluation step
+        uses: betrybe/store-evaluation-action@v2
+        with:
+          evaluation-data: ${{ steps.pytest_evaluator.outputs.result }}
+          environment: staging
+          pr-number: ${{ github.event.number }}
