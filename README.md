@@ -1,1 +1,1 @@
-# rubric-tech-news
+# rubric-tech-newsrr
